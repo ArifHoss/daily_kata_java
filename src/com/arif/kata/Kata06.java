@@ -17,23 +17,23 @@ public class Kata06 {
 
     private static final String VOWELS = "aeiouAEIOU";
 
-    public static String translateWord(String pigLatin) {
+    public static String translateWord(String word) {
 
-        if (pigLatin.isEmpty()) {
+        if (word.isEmpty()) {
             // If the word is empty, return an empty string
             return "";
         }
-        char firstChar = pigLatin.charAt(0);
-        String restOfWord = pigLatin.substring(1);
+        char firstChar = word.charAt(0);
+        String restOfWord = word.substring(1);
         String result = "";
 
         // If the word start with vowel, simply add "yay" to the end
         if (VOWELS.indexOf(firstChar) >= 0) {
-            result = pigLatin + "yay";
+            result = word + "yay";
         } else {
             // If the word start with consonant, find the index of the vowel
             Pattern pattern = Pattern.compile("[aeiouAEIOU]");
-            Matcher matcher = pattern.matcher(pigLatin);
+            Matcher matcher = pattern.matcher(word);
 
             // Use a regular expression to find the index of the first vowel in the word
             // If no vowel is found, default to 1 (the second letter)
@@ -45,8 +45,8 @@ public class Kata06 {
             } else {
 
                 // Otherwise, split the word into the consonants before the vowel and the rest of the word
-                String consonants = pigLatin.substring(0, index);
-                String resOfWordAfterVowel = pigLatin.substring(index);
+                String consonants = word.substring(0, index);
+                String resOfWordAfterVowel = word.substring(index);
                 // Move the consonants to the end and add "ay"
                 result = resOfWordAfterVowel + consonants + "ay";
             }
