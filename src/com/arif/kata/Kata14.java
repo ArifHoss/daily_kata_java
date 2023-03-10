@@ -1,5 +1,6 @@
 package com.arif.kata;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,6 +25,7 @@ public class Kata14 {
         }
         return false;
     }
+
     private static boolean isSorted(char[] chars, boolean sorted) {
         for (int j = 1; j < chars.length; j++) {
             if (chars[j] < chars[j - 1]) {
@@ -33,7 +35,6 @@ public class Kata14 {
         }
         return sorted;
     }
-
 
 
     private static boolean hasAlphabeticallySortedWord1(String sentence) {
@@ -53,6 +54,20 @@ public class Kata14 {
 //            }
             if (sorted) {
                 return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isAlphabeticallySortedPayMan(String sentence) {
+        String[] strArr = sentence.replace(".", "").split(" ");
+        for (String s : strArr) {
+            if (s.length() > 2) {
+                char[] chars = s.toCharArray();
+                Arrays.sort(chars);
+                String sorted = String.valueOf(chars);
+                if (sorted.equals(s))
+                    return true;
             }
         }
         return false;

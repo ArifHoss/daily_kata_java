@@ -1,35 +1,38 @@
 package com.arif.kata;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class KATA15 {
     public static void main(String[] args) {
-        System.out.println(removeHashAndPreviousChar("he##l#hel#llo"));
-        System.out.println(removeHashAndPreviousChar("major# spar##ks"));
-        System.out.println(removeHashAndPreviousChar("si###t boy"));
-        System.out.println(removeHashAndPreviousChar("####"));
+
+        System.out.println(happy(203));
+        System.out.println(happy(11));
+        System.out.println(happy(107));
+
     }
+    static boolean happy(int num) {
+        if(num == 1) return true;
+        if(num == 4) return false;
+        String str = String.valueOf(num);
+        int sum = 0;
 
-    private static String returnWord(String word) {
-        return word.replaceAll("[*#\\s]", "");
-    }
-
-    /**
-     * Removes '#' characters and the character immediately before them from a string.
-     */
-
-    private static String removeHashAndPreviousChar(String str) {
-
-        List<Character> newStr = new ArrayList<>();
         for (int i = 0; i < str.length(); i++) {
-            if (str.charAt(i) == '#') {
-                if (!newStr.isEmpty())
-                    newStr.remove(newStr.size() - 1);
-            } else {
-                newStr.add(str.charAt(i));
-            }
+            sum += Math.pow(Character.getNumericValue(str.charAt(i)), 2);
         }
-        return newStr.toString().replaceAll("[,#\\s]", "").replace("[", "").replace("]", "");
+
+        return happy(sum);
     }
+
+    public static boolean happyPayMan(int num) {
+        if (num == 1) {
+            return true;
+        }
+        if (num == 4) {
+            return false;
+        }
+        return happy(("" + num).chars()
+                .map(Character::getNumericValue)
+                .map(i -> (int)Math.pow(i, 2))
+                .sum());
+    }
+
+
 }
